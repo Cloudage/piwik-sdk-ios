@@ -1,0 +1,10 @@
+framework module PiwikTracker {
+  umbrella header "PiwikTracker.h"
+
+  export *
+  module * { export * }
+}
+
+module PiwikTracker.Swift {
+    header "PiwikTracker-Swift.h"
+}
