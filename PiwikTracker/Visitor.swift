@@ -12,28 +12,26 @@ struct Visitor {
     /// Unique ID per visitor (device in this case). Should be
     /// generated upon first start and never changed after.
     /// api-key: _id
-    var id: String
+    let id: String
     
     /// An optional user identifier such as email or username.
     /// api-key: uid
-    var userId: String?
+    let userId: String?
 }
 
 extension Visitor {
     static func current() -> Visitor {
         guard let id = PiwikUserDefaults.standard.clientId else {
             PiwikUserDefaults.standard.clientId = newVisitorID()
-          print(PiwikUserDefaults.standard.clientId)
             return current()
         }
-        print(id)
         //let userId: String? = nil // we can add the userid later
-        guard let userId = PiwikUserDefaults.standard.userId else {
+        /*guard let userId = PiwikUserDefaults.standard.userId else {
             let newUserId = "Offline User - \(id)"
             PiwikUserDefaults.standard.userId = newUserId
             return Visitor(id: id, userId: newUserId)
-        }
-        return Visitor(id: id, userId: userId)
+        }*/
+        return Visitor(id: id, userId: id)
     }
     
     static func newVisitorID() -> String {

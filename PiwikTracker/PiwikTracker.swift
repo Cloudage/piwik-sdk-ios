@@ -45,7 +45,7 @@ final public class PiwikTracker: NSObject {
         super.init()
         startNewSession()
         startDispatchTimer()
-        addObserverForUserId()
+        //addObserverForUserId()
     }
     
     /// Create and Configure a new Tracker
@@ -143,7 +143,7 @@ final public class PiwikTracker: NSObject {
     internal var session = Session.current()
     internal var nextEventStartsANewSession = true
 
-    private func resetUserId() {
+    /*private func resetUserId() {
       guard let userId = PiwikUserDefaults.standard.userId else {
         let newUserId = "Offline User - \(visitor.id)"
         PiwikUserDefaults.standard.userId = newUserId
@@ -165,7 +165,7 @@ final public class PiwikTracker: NSObject {
       if keyPath == PiwikUserDefaults.Key.userID {
         resetUserId()
       }
-    }
+    }*/
 
 }
 
