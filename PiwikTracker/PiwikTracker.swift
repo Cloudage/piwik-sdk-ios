@@ -152,18 +152,28 @@ final public class PiwikTracker: NSObject {
       }
       visitor.userId = userId
     }
+    private func resetVisitorId() {
+      guard let id = PiwikUserDefaults.standard.clientId else {
+        return
+      }
+      visitor.id = id
+    }
 
     fileprivate func addObserverForUserId() {
       UserDefaults.standard.addObserver(self, forKeyPath: PiwikUserDefaults.Key.userID, options: .new, context: nil)
+      UserDefaults.standard.addObserver(self, forKeyPath: PiwikUserDefaults.Key.visitorID , options: .new, context: nil)
     }
 
     deinit {
       UserDefaults.standard.removeObserver(self, forKeyPath: PiwikUserDefaults.Key.userID)
+      UserDefaults.standard.removeObserver(self, forKeyPath: PiwikUserDefaults.Key.visitorID)
     }
 
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
       if keyPath == PiwikUserDefaults.Key.userID {
         resetUserId()
+      } else if keyPath == PiwikUserDefaults.Key.visitorID {
+        resetVisitorId()
       }
     }
 

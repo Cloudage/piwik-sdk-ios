@@ -12,7 +12,7 @@ struct Visitor {
     /// Unique ID per visitor (device in this case). Should be
     /// generated upon first start and never changed after.
     /// api-key: _id
-    let id: String
+    var id: String
     
     /// An optional user identifier such as email or username.
     /// api-key: uid
