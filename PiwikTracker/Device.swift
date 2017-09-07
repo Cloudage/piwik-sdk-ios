@@ -28,6 +28,10 @@ internal struct Device {
     
     // The native screen size
     let nativeScreenSize: CGSize?
+
+    static var deviceID: String? {
+      return UIDevice.current.identifierForVendor?.uuidString
+    }
     
     /// The platform name of the current device i.e. "iPhone1,1" or "iPad3,6"
     private static func currentPlatform() -> String  {

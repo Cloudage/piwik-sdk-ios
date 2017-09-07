@@ -35,10 +35,13 @@ extension Visitor {
     }
     
     static func newVisitorID() -> String {
+      guard let id = Device.deviceID else {
         let uuid = UUID().uuidString
         let sanitizedUUID = uuid.replacingOccurrences(of: "-", with: "")
         let start = sanitizedUUID.startIndex
         let end = sanitizedUUID.index(start, offsetBy: 16)
         return sanitizedUUID.substring(with: start..<end)
+      }
+      return id
     }
 }
