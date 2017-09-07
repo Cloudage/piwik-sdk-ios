@@ -13,14 +13,14 @@ final class URLSessionDispatcher: Dispatcher {
     let baseURL: URL
 
     var userAgent: String? = {
-        #if os(OSX)
-            let webView = WebView(frame: .zero)
-            let currentUserAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent") ?? ""
-        #elseif os(iOS)
+        #if os(iOS)
             let webView = UIWebView(frame: .zero)
             let currentUserAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent") ?? ""
+        /*#elseif os(OSX)
+            let webView = WebView(frame: .zero)
+            let currentUserAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent") ?? ""
         #elseif os(tvOS)
-            let currentUserAgent = ""
+            let currentUserAgent = ""*/
         #endif
         return currentUserAgent.appending(" PiwikTracker SDK URLSessionDispatcher")
     }()

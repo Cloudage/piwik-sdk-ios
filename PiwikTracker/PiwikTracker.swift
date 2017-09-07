@@ -142,6 +142,17 @@ final public class PiwikTracker: NSObject {
     internal var session = Session.current()
     internal var nextEventStartsANewSession = true
 
+    public func setUserId(_ userID: String?) {
+      PiwikUserDefaults.standard.userId = userID
+      guard let userId = PiwikUserDefaults.standard.userId else {
+        let newUserId = "Offline User - \(visitor.id)"
+        PiwikUserDefaults.standard.userId = newUserId
+        visitor.userId = newUserId
+        return
+      }
+      visitor.userId = userId
+    }
+
 }
 
 extension PiwikTracker {

@@ -73,7 +73,11 @@ internal struct PiwikUserDefaults {
         return userDefaults.string(forKey: PiwikUserDefaults.Key.userID)
       }
       set {
-        userDefaults.setValue(newValue, forKey: PiwikUserDefaults.Key.userID)
+        if let userID = newValue {
+          userDefaults.setValue(userID, forKey: PiwikUserDefaults.Key.userID)
+        } else {
+          userDefaults.removeObject(forKey: PiwikUserDefaults.Key.userID)
+        }
         userDefaults.synchronize()
       }
     }

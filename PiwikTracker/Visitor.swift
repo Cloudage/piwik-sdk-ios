@@ -16,7 +16,7 @@ struct Visitor {
     
     /// An optional user identifier such as email or username.
     /// api-key: uid
-    let userId: String?
+    var userId: String?
 }
 
 extension Visitor {
