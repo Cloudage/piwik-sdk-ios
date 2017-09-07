@@ -25,7 +25,11 @@ extension Visitor {
             PiwikUserDefaults.standard.clientId = newVisitorID()
             return current()
         }
-        let userId: String? = nil // we can add the userid later
+        //let userId: String? = nil // we can add the userid later
+        guard let userId = PiwikUserDefaults.standard.userId else {
+            PiwikUserDefaults.standard.userId = "Offline User"
+            return Visitor(id: id, userId: "Offline User")
+        }
         return Visitor(id: id, userId: userId)
     }
     
