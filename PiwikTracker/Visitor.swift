@@ -23,8 +23,10 @@ extension Visitor {
     static func current() -> Visitor {
         guard let id = PiwikUserDefaults.standard.clientId else {
             PiwikUserDefaults.standard.clientId = newVisitorID()
+          print(PiwikUserDefaults.standard.clientId)
             return current()
         }
+        print(id)
         //let userId: String? = nil // we can add the userid later
         guard let userId = PiwikUserDefaults.standard.userId else {
             let newUserId = "Offline User - \(id)"
