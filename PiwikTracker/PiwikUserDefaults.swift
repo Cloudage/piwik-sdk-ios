@@ -84,7 +84,7 @@ internal struct PiwikUserDefaults {
 }
 
 extension PiwikUserDefaults {
-    fileprivate struct Key {
+    struct Key {
         static let totalNumberOfVisits = "PiwikTotalNumberOfVistsKey"
         static let currentVisitTimestamp = "PiwikCurrentVisitTimestampKey"
         static let previousVistsTimestamp = "PiwikPreviousVistsTimestampKey"

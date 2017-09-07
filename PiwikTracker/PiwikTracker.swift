@@ -45,6 +45,7 @@ final public class PiwikTracker: NSObject {
         super.init()
         startNewSession()
         startDispatchTimer()
+        addObserverForUserId()
     }
     
     /// Create and Configure a new Tracker
@@ -142,8 +143,7 @@ final public class PiwikTracker: NSObject {
     internal var session = Session.current()
     internal var nextEventStartsANewSession = true
 
-    public func setUserId(_ userID: String?) {
-      PiwikUserDefaults.standard.userId = userID
+    private func resetUserId() {
       guard let userId = PiwikUserDefaults.standard.userId else {
         let newUserId = "Offline User - \(visitor.id)"
         PiwikUserDefaults.standard.userId = newUserId
@@ -151,6 +151,20 @@ final public class PiwikTracker: NSObject {
         return
       }
       visitor.userId = userId
+    }
+
+    fileprivate func addObserverForUserId() {
+      UserDefaults.standard.addObserver(self, forKeyPath: PiwikUserDefaults.Key.userID, options: .new, context: nil)
+    }
+
+    deinit {
+      UserDefaults.standard.removeObserver(self, forKeyPath: PiwikUserDefaults.Key.userID)
+    }
+
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+      if keyPath == PiwikUserDefaults.Key.userID {
+        resetUserId()
+      }
     }
 
 }
