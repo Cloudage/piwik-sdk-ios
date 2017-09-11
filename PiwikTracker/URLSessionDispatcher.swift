@@ -98,7 +98,7 @@ fileprivate extension Event {
                 URLQueryItem(name: "rec", value: "1"),
                 // Visitor
                 URLQueryItem(name: "_id", value: visitor.id),
-                URLQueryItem(name: "uid", value: visitor.userId),
+                //URLQueryItem(name: "uid", value: visitor.userId),
                 
                 // Session
                 URLQueryItem(name: "_idvc", value: "\(session.sessionsCount)"),
