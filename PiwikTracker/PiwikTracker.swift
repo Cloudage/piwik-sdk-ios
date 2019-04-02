@@ -78,7 +78,7 @@ final public class PiwikTracker: NSObject {
     
     /// Manually start the dispatching process. You might want to call this method in AppDelegates `applicationDidEnterBackground` to transmit all data
     /// whenever the user leaves the application.
-    public func dispatch() {
+  @objc public func dispatch() {
         guard !isDispatching else {
             logger.verbose("PiwikTracker is already dispatching.")
             return
